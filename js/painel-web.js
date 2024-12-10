@@ -364,10 +364,15 @@ var PainelWeb = {
                 if (params.local) {
                     // nome do local
                     this.queue.push({name: senha.local.toLowerCase(), lang: params.lang});
-                    // numero do local
-                    var num = senha.numeroLocal + '';
-                    for (var i = 0; i < num.length; i++) {
-                        this.queue.push({name: num.charAt(i).toLowerCase(), lang: params.lang});
+	            // Número do guichê
+	            var num = senha.numeroLocal.toString();
+	            for (var i = 0; i < num.length; i++) {
+	                this.queue.push({name: num.charAt(i).toLowerCase(), lang: params.lang});
+	            }
+	
+	            // Determina a direção
+	            var direcao = this.getDirecao(senha.numeroLocal);
+	            this.queue.push({name: direcao, lang: params.lang});
                     }
                 }
             }
@@ -375,6 +380,17 @@ var PainelWeb = {
                 this.processQueue();
             }
         },
+
+
+	getDirecao: function(numeroLocal) {
+	    if ([3, 4, 5].includes(numeroLocal)) {
+	        return "aesquerda";  // Áudio para guichês à esquerda
+	    } else if ([6, 7, 8].includes(numeroLocal)) {
+	        return "adireita";  // Áudio para guichês à direita
+	    }
+	    return "";  // Sem direção se não for encontrado
+	},
+
 
         playFile: function(filename) {
             var self = this;
