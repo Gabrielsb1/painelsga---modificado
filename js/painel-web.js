@@ -254,15 +254,18 @@ angular.module('app', [])
             $("#layout").i18n();
         };
         
+ 
         $scope.testSpeech = function() {
+           
             PainelWeb.Speech.play(
                 {
                     mensagem: i18n.t('PainelWeb.test_priority_normal') || 'Convencional',
                     sigla: 'A',
                     numero: 1,
                     length: 3,
-                    local: 'test-local',
+                    local: 'guichê',
                     numeroLocal: '1',
+                    direcao: 'adireita',
                 },
                 speechParams()
             );
@@ -355,24 +358,35 @@ var PainelWeb = {
             params = params || {};
             if (params.vocalizar) {
                 // "senha"
-                this.queue.push({name: "senha", lang: params.lang});
-                // sigla + numero
+                this.queue.push({ name: "senha", lang: params.lang });
+                
+                // Sigla + Número
                 var text = (params.zeros) ? $.painel().format(senha) : senha.sigla + senha.numero;
                 for (var i = 0; i < text.length; i++) {
-                    this.queue.push({name: text.charAt(i).toLowerCase(), lang: params.lang});
+                    this.queue.push({ name: text.charAt(i).toLowerCase(), lang: params.lang });
                 }
+                
+                // Local (ex: Guichê)
                 if (params.local) {
-                    // nome do local
-                    this.queue.push({name: senha.local.toLowerCase(), lang: params.lang});
-	            // Número do guichê
-	            var num = senha.numeroLocal.toString();
-	            for (var i = 0; i < num.length; i++) {
-	                this.queue.push({name: num.charAt(i).toLowerCase(), lang: params.lang});
-	            }
-	
-	            // Determina a direção
-	            var direcao = this.getDirecao(senha.numeroLocal);
-	            this.queue.push({name: direcao, lang: params.lang});
+                    this.queue.push({ name: senha.local.toLowerCase(), lang: params.lang });
+                    var num = senha.numeroLocal + '';
+                    for (var i = 0; i < num.length; i++) {
+                        this.queue.push({ name: num.charAt(i).toLowerCase(), lang: params.lang });
+                    }
+                    
+                    // Condicional para Direção
+                    var direcao = "";
+                    if (["3", 3, "4", 4, "5", 5].includes(senha.numeroLocal)) {
+                        direcao = "adireita";
+                    } else if (["6",6,"7",7, "8",8].includes(senha.numeroLocal)) {
+                        direcao = "aesquerda";
+                    }
+                    
+                    if (direcao) {
+                        var direcaoWords = direcao.split(' ');
+                        direcaoWords.forEach(word => {
+                            this.queue.push({ name: word.toLowerCase(), lang: params.lang });
+                        });
                     }
                 }
             }
@@ -380,34 +394,7 @@ var PainelWeb = {
                 this.processQueue();
             }
         },
-
-
-	getDirecao: function(numeroLocal) {
-	    if ([3, 4, 5].includes(numeroLocal)) {
-	        return "aesquerda";  // Áudio para guichês à esquerda
-	    } else if ([6, 7, 8].includes(numeroLocal)) {
-	        return "adireita";  // Áudio para guichês à direita
-	    }
-	    return "";  // Sem direção se não for encontrado
-	},
-
-
-        playFile: function(filename) {
-            var self = this;
-            var bz = new buzz.sound(filename, {
-                formats: ["mp3"],
-                autoplay: true
-            });
-
-            var end = function() {
-                self.processQueue();
-            };
-
-            bz.bind("ended", end);
-            
-            bz.bind("error", end);
-        },
-
+                
         processQueue: function() {
             if (this.playing && this.queue.length === 0) {
                 this.playing = false;
@@ -418,10 +405,28 @@ var PainelWeb = {
             if (current) {
                 this.playing = true;
                 var filename = "media/voice/" + current.lang + "/" + current.name;
-                this.playFile(filename);
+                this.playFile(filename, 1);
             }
+        },
+    
+        playFile: function(filename) {
+            var self = this;
+            var bz = new buzz.sound(filename, {
+                formats: ["mp3"],
+                autoplay: true
+            });
+    
+            var end = function() {
+                self.processQueue();
+            };
+
+            
+    
+            bz.bind("ended", end);
+            bz.bind("error", end);
         }
     },
+    
 
     Storage: {
         

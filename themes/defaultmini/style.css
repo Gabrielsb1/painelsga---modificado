@@ -2,6 +2,27 @@
  * Default layout - Painel Web
  * @author Rogerio Lino <rogeriolino@gmail.com>
  */
+
+ @media (min-width: 1920px) {
+    #senha-container {
+        padding: 30px; /* Ajuste de espaçamento para telas grandes */
+    }
+
+    .current-password h2,
+    .current-password h1,
+    .current-password h3 {
+        font-size: 2rem; /* Amplia o texto */
+    }
+
+    .current-password .counter {
+        font-size: 2.5rem; /* Ajuste para o número */
+    }
+
+    .table-container table {
+        font-size: 1.5rem; /* Melhora a leitura da tabela */
+    }
+}
+
 #layout, #layout * { 
     padding: 0;
     margin: 0;
@@ -12,7 +33,7 @@
  * Senha Atual - Ultima senha chamada
  */
 #mensagem {
-    padding-bottom: 20px;
+    padding-bottom: 0px;
     padding-left: 20px;
 }
 
@@ -23,7 +44,6 @@
 
 #senha {
     font-weight: bold;
-    
    /* text-align: center;*/
 }
 
@@ -90,6 +110,7 @@
 
 /* fonts */
 
+
 #mensagem span {
     font-size: 5vw;
 }
@@ -103,15 +124,7 @@
 }
 
 #local-numero span {
-    font-size: 24em; /* esse altera o tamanho do numero do guinche  */
-}
-
-#local span {
-    font-size: 8em; /* adicionei esse codigo, para mudar o tamanho do texto guinche  */
-}
-
-#senha-container {
-    margin: 10px;
+    font-size: 24em;
 }
 
 #datahoramin{
@@ -166,6 +179,40 @@
     right: 20px;
     width: 20%;
 }
+
+/* Contêiner do vídeo */
+#video-container {
+    background-color: #259768;
+    width: 100%;
+    height: 100vh; /* Garante que o contêiner ocupe toda a altura da tela */
+    position: relative;
+    overflow: hidden; /* Impede que o vídeo ultrapasse a área do contêiner */
+}
+
+#video {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Ajusta o vídeo para caber no contêiner, mas pode deixar espaços vazios */
+    object-position: center;
+}
+
+
+
+#senha-container {
+    padding: 10px;
+    height: 100vh; /* Altura total */
+    overflow-y: auto; /* Permite rolar caso o conteúdo ultrapasse */
+    background-color: #ffffff; /* Adiciona um fundo semitransparente (opcional) */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+
+#historico {
+    margin-top: 10px;
+}
+
 .container-date #day { font-weight: bold; color: #06008A; text-transform: uppercase; font-size:3em; text-align:center; }
 .container-date #date { padding: 20px 0 0 5px; font-weight: bold; color: #06008A; text-transform: uppercase; font-size:3em; text-align:center; }
 .container-date #date span {font-weight: normal; }
@@ -193,4 +240,96 @@
         display: none;
     }
     
+}
+
+/* painel de senhas novo */
+
+.current-password {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.current-password h2 {
+    margin: 0;
+    font-size: 50px;
+    color: #555555;
+}
+
+.current-password .password {
+    font-size: 130px;
+    font-weight: bold;
+    color: #2e602f;
+    margin: 10px 0;
+}
+
+.current-password .type {
+    font-size: 50px;
+    font-weight: bold;
+    color: #5ea160; 
+    margin: 0;
+}
+
+.current-password h3 {
+    margin: 20px 0 0 0;
+    font-size: 50px;
+    font-weight: bold;
+    /* color: #555555 */;
+    color: #5ea160; 
+}
+
+.current-password .counter {
+    font-size: 200px;
+    font-weight: bold;
+    color: #2e602f;
+    margin: 10px 0;
+}
+
+.table-container {
+    width: 100%;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+thead th {
+    padding: 10px;
+    font-size: 16px;
+    color: #555555;
+    text-align: left;
+}
+
+/* Alinhamento das colunas da tabela */
+.align-left {
+    text-align: left;
+    padding-left: 15px;
+    font-size: 30px;
+}
+
+.align-center {
+    text-align: center;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.align-right {
+    text-align: right;
+    padding-right: 15px;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+tbody tr {
+    border-bottom: 1px solid #e0e0e0;
+}
+
+tbody td {
+    padding: 10px;
+    font-size: 14px;
+    color: #333333;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f8f8f8;
 }

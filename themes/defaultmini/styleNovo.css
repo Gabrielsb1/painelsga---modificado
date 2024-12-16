@@ -1,0 +1,131 @@
+/* Estilo geral */
+
+#layout, #layout *{
+
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f8ed; /* Cor de fundo */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    max-width: 100%;
+    
+}
+
+.container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+.left-panel {
+    flex: 10; /* Proporção */
+    background-color: #e9f0dd; 
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    
+
+}
+
+.right-panel {
+    flex: 2; /* Proporção */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.current-password {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.current-password h2 {
+    margin: 0;
+    font-size: 18px;
+    color: #555555;
+}
+
+.current-password .password {
+    font-size: 70px;
+    font-weight: bold;
+    color: #2e602f;
+    margin: 10px 0;
+}
+
+.current-password .type {
+    font-size: 18px;
+    font-weight: bold;
+    color: #5ea160; 
+    margin: 0;
+}
+
+.current-password h3 {
+    margin: 20px 0 0 0;
+    font-size: 16px;
+    font-weight: bold;
+    color: #555555;
+}
+
+.current-password .counter {
+    font-size: 65px;
+    font-weight: bold;
+    color: #2e602f;
+    margin: 10px 0;
+}
+
+.table-container {
+    width: 100%;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+thead th {
+    padding: 10px;
+    font-size: 16px;
+    color: #555555;
+    text-align: left;
+}
+
+/* Alinhamento das colunas da tabela */
+.align-left {
+    text-align: left;
+    padding-left: 15px;
+}
+
+.align-center {
+    text-align: center;
+    font-weight: bold;
+}
+
+.align-right {
+    text-align: right;
+    padding-right: 15px;
+    font-weight: bold;
+}
+
+tbody tr {
+    border-bottom: 1px solid #e0e0e0;
+}
+
+tbody td {
+    padding: 10px;
+    font-size: 14px;
+    color: #333333;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f8f8f8;
+}

@@ -13,34 +13,24 @@
         <![endif]-->
         <script type="text/javascript" src="js/angular.min.js"></script>
         <style>
-            /* Tornar o vídeo responsivo e ajustar a altura para preencher a tela */
+            /* Contêiner do vídeo */
+            #video-container {
+                width: 100%;
+                height: 100vh; /* Faz com que o vídeo ocupe toda a altura da tela */
+                position: relative;
+                overflow: hidden; /* Previne que o vídeo ultrapasse a área */
+            }
+
             #video {
                 width: 100%;
-                max-height: 100%;
-                height: 100vh;
-                object-fit: scale-down(100%);
+                height: 100%;
+                object-fit: cover; /* Ajusta o vídeo na tela sem distorção */
+                object-position: center; /* Centraliza o vídeo */
             }
-
-            #container_video {
-                background-color: #5F6B52;
-                height: 100vh;
-                width: 30%;
-                
-            }
-
-            body {
-                display: flex;
-                flex-direction: row;
-                padding: 0;
-                margin: 0;
-            }
-
-           
-
         </style>
     </head>
     <body ng-controller="PainelCtrl" ng-init="init()">
-        <!-- menu retrátil -->
+        <!-- menu retratil -->
         <div id="menu">
             <ul>
                 <li>
@@ -61,26 +51,11 @@
         <!-- theme -->
         <link rel="stylesheet" type="text/css" ng-href="themes/{{ config.theme }}/style.css" />
 
-        <!-- Layout dividido em 2 colunas -->
-        <div id="layout" class="{{ ultima.styleClass }} container-fluid">
-            <div class="row">
-                <!-- Coluna do vídeo (40% largura) -->
-                <div class="col-md-3" id="container_video">
-                    <!-- Vídeo incorporado -->
-                    <video id="video"  autoplay muted loop>
-                        <source src="themes/default/PROJETO REURB.mp4" type="video/mp4">
-                        Seu navegador não suporta a tag de vídeo.
-                    </video>
-                </div>
-
-                <!-- Coluna do painel de senhas -->
-                <div class="col-md-8">
-                    <div ng-include="'themes/' + config.theme + '/index.html'" onload="themeResources()"></div>
-                </div>
-            </div>
+        <div id="layout" class="{{ ultima.styleClass }}">
+            <div ng-include="'themes/' + config.theme + '/index.html'" onload="themeResources()"></div>
         </div>
 
-        <!-- Modal de configuração -->
+        <!-- config modal -->
         <div id="config" class="modal fade">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -190,8 +165,8 @@
                 </div>
             </div>
         </div>
-
-        <!-- Modal de erro -->
+        
+        <!-- error modal -->
         <div id="error" class="modal fade">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -206,6 +181,10 @@
             </div>
         </div>
           
+        <!-- 
+            Sounds by http://www.freesound.org
+            http://www.fromtexttospeech.com
+        -->
         <audio id="alert"></audio>
 
         <script type="text/javascript" src="js/jquery.js"></script>

@@ -84,3 +84,39 @@ html, body, #layout {
 #layout.inactive span {
     color: #ccc;
 }
+
+
+#video-container {
+    width: 100%;
+    height: 100vh; /* Garante que o contêiner ocupe 100% da altura da tela */
+    position: relative;
+    overflow: hidden; /* Garante que o conteúdo não ultrapasse a área do contêiner */
+}
+
+#video {
+    width: 100%; /* Garante que o vídeo ocupe 100% da largura do contêiner */
+    height: 100%; /* Garante que o vídeo ocupe 100% da altura do contêiner */
+    object-fit: cover; /* Faz com que o vídeo cubra toda a tela sem distorcer */
+    object-position: center; /* Centraliza o vídeo */
+}
+
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+#video-container {
+    width: 100%;
+    height: 100vh; /* Certifica-se de que o contêiner cubra 100% da altura da tela */
+    position: relative;
+    overflow: hidden;
+}
+
+#video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Asegura que o vídeo cubra completamente o contêiner */
+    object-position: center;
+}
